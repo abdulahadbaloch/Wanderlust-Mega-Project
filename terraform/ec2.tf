@@ -4,7 +4,6 @@ resource "aws_key_pair" "deployer" {
 }
 
 resource "aws_default_vpc" "default" {
-
 }
 
 resource "aws_security_group" "allow_user_to_connect" {
@@ -18,7 +17,6 @@ resource "aws_security_group" "allow_user_to_connect" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   egress {
     description = " allow all outgoing traffic "
     from_port   = 0
@@ -26,7 +24,6 @@ resource "aws_security_group" "allow_user_to_connect" {
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   ingress {
     description = "port 80 allow"
     from_port   = 80
@@ -34,7 +31,6 @@ resource "aws_security_group" "allow_user_to_connect" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   ingress {
     description = "port 443 allow"
     from_port   = 443
@@ -42,14 +38,28 @@ resource "aws_security_group" "allow_user_to_connect" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-
   tags = {
     Name = "mysecurity"
   }
 }
 
+data "aws_ami" "ubuntu" {
+  most_recent = true
+  owners      = ["099720109477"] # Canonical
+
+  filter {
+    name   = "name"
+    values = ["ubuntu/images/hvm-ssd/ubuntu-jammy-22.04-amd64-server-*"]
+  }
+
+  filter {
+    name   = "virtualization-type"
+    values = ["hvm"]
+  }
+}
+
 resource "aws_instance" "testinstance" {
-  ami             = var.ami_id
+  ami             = data.aws_ami.ubuntu.id
   instance_type   = var.instance_type
   key_name        = aws_key_pair.deployer.key_name
   security_groups = [aws_security_group.allow_user_to_connect.name]
@@ -57,7 +67,7 @@ resource "aws_instance" "testinstance" {
     Name = "Automate"
   }
   root_block_device {
-    volume_size = 30 
+    volume_size = 30
     volume_type = "gp3"
   }
 }
