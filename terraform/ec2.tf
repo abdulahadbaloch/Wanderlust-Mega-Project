@@ -12,7 +12,6 @@ resource "aws_security_group" "allow_user_to_connect" {
   vpc_id      = aws_default_vpc.default.id
 
   ingress {
-    description = "port 22 allow"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
@@ -20,7 +19,6 @@ resource "aws_security_group" "allow_user_to_connect" {
   }
 
   egress {
-    description = "allow all outgoing traffic"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
@@ -28,7 +26,6 @@ resource "aws_security_group" "allow_user_to_connect" {
   }
 
   ingress {
-    description = "port 80 allow"
     from_port   = 80
     to_port     = 80
     protocol    = "tcp"
@@ -36,7 +33,6 @@ resource "aws_security_group" "allow_user_to_connect" {
   }
 
   ingress {
-    description = "port 443 allow"
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
@@ -50,7 +46,7 @@ resource "aws_security_group" "allow_user_to_connect" {
 
 data "aws_ami" "ubuntu" {
   most_recent = true
-  owners      = ["099720109477"] # Canonical
+  owners      = ["099720109477"]
 
   filter {
     name   = "name"
