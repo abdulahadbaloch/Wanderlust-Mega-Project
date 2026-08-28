@@ -14,7 +14,7 @@ WanderLust is a simple MERN travel blog website ✈ This project is aimed to hel
 
 #
 
-## Tech stack used in this project:
+## Get lern with Abdul Ahad:
 - GitHub (Code)
 - Docker (Containerization)
 - Jenkins (CI)
