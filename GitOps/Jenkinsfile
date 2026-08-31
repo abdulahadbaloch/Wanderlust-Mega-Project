@@ -19,7 +19,7 @@ pipeline {
         stage('Git: Code Checkout') {
             steps {
                 script{
-                    code_checkout("https://github.com/LondheShubham153/Wanderlust-Mega-Project.git","main")
+                    code_checkout("https://github.com/abdulahadbaloch/Wanderlust-Mega-Project.git","main")
                 }
             }
         }
@@ -68,7 +68,7 @@ pipeline {
                         git commit -m "Updated environment variables"
                         
                         echo "Pushing changes to github: "
-                        git push https://github.com/LondheShubham153/Wanderlust-Mega-Project.git main
+                        git push https://github.com/abdulahadbaloch/Wanderlust-Mega-Project.git main
                     '''
                     }
                 }
@@ -117,7 +117,7 @@ pipeline {
                     </body>
                     </html>
             """,
-            to: 'trainwithshubham@gmail.com',
+            to: 'abdul12101ahad@gmail.com',
             mimeType: 'text/html'
             }
         }
